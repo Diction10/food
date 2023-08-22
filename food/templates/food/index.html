@@ -1,0 +1,28 @@
+{% extends 'food/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}   
+
+    <div class="content-section">
+        <section>
+            <h2> Featured Food and Drinks </h2>
+                {% for chunk in imgs %}
+                <section class="featured">
+                    {% for img in chunk %}
+                    <article>
+                        <img src="{{ img.image.url }}" alt=" {{ food_item.name }} ">
+                        <h3> {{ img.name }}</h3>
+                        <p>{{ img.description }}</p>
+                        <a href="{% url 'order' img.name %}" class="btn">Order Now</a>
+                    </article> 
+                    {% endfor %}       
+                </section>
+                {% endfor %}
+        </section>
+    </div>
+
+{% endblock %}

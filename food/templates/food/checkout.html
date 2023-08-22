@@ -1,0 +1,38 @@
+{% extends 'food/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+    <h1> Checkout Page </h1>
+    <div class="invoice">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+        </div>
+        <div class="invoice-details">
+            <p>Invoice Number: 12345</p>
+            <p>Date: {{ today }}</p>
+        </div>
+        <table class="invoice-item-list">
+            <thead>
+                <tr>
+                    <th>Item Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ detail.name }}</td>
+                        <td>{{detail.quantity}}</td>
+                        <td>${{ detail.price }}</td>
+                        <td>${{ total}}</td>
+                    </tr>
+            </tbody>
+        </table>
+        <div class="invoice-total">
+            <p><strong>Total: ${{ total}}</strong></p>
+        </div>
+    </div>
+
+{% endblock %}

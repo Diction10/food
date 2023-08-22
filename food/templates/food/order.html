@@ -1,0 +1,31 @@
+{% extends 'food/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <h1>Order Your {{ food_item.name | capfirst}}</h1>
+        
+        <form class="order-form" method="post" action="{% url 'cart' request.user food_item.name %}">
+            {% csrf_token %}
+            <div class="food-image">
+                <img src="{{ food_item.image.url }}" alt="{{ food_item.name }}">
+            </div>
+            
+            <div class="food-details">
+                <h2>{{ food_item.name | capfirst}}</h2>
+                <p>{{ food_item.description }}</p>
+                <p>Price: £ {{ food_item.price }}</p>
+            </div>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1">
+            <br>
+            <div class="form-group">
+                <a onclick="checkout()" id="anchor-order" href="{% url 'checkout' food_item.name %}" class="btn">Checkout</a>
+                <button class="btn btn-outline-info" type="submit">Add To Cart</button>
+            </div>
+        </form>
+    </div>
+   
+{% endblock %}

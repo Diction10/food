@@ -1,0 +1,30 @@
+{% extends 'food/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block body %}
+    <h1> Cart Page </h1>
+        <div class="cart-container">
+            {% for item in items %}
+                {% for i in item.food_name.all %}
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <h3>{{ i.name }}</h3>
+                        </div>
+                        <div class="item-price">${{item.amount}}</div>
+                        <div class="item-quantity">
+                            Quantity: <input type="number" class="quantity" value="{{item.quantity}}" min="1" readonly>
+                        </div>
+                        <div class="item-total">${{item.amount}}</div> 
+                        <div>
+                            <a href="{% url 'delete_item' item.id %}" class="btn">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+            {% endfor %}  
+            <div class="total" id="total">
+                Total: $0.00
+            </div>      
+        </div>    
+{% endblock %}
